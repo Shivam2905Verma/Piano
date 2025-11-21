@@ -60,24 +60,48 @@ let written = document.querySelector(".written");
 
 document.body.addEventListener("keydown", function (e) {
   let key = e.key.toLowerCase();
+  playKey(key);
+});
 
+document.body.addEventListener("keyup", function (e) {
+  let key = e.key.toLowerCase();
+  releaseKey(key);
+});
+
+Object.keys(buttons).forEach((key) => {
+  buttons[key].addEventListener("mousedown", function () {
+    playKey(key);
+  });
+
+  buttons[key].addEventListener("mouseup", function () {
+    releaseKey(key);
+  });
+
+  buttons[key].addEventListener("touchstart", function () {
+    playKey(key);
+  });
+
+  buttons[key].addEventListener("touchend", function () {
+    releaseKey(key);
+  });
+});
+
+function playKey(key) {
   if (buttons[key]) {
     written.innerHTML = key;
     written.style.opacity = 1;
+
     buttons[key].classList.add("active");
-    console.log(buttons[key]);
 
     let audio = new Audio(sounds[key]);
     audio.currentTime = 0;
     audio.play();
   }
-});
+}
 
-document.body.addEventListener("keyup", function (e) {
-  let key = e.key.toLowerCase();
-
+function releaseKey(key) {
   if (buttons[key]) {
     written.style.opacity = 0;
     buttons[key].classList.remove("active");
   }
-});
+}
