@@ -1,4 +1,3 @@
-// 1. Select all 24 buttons
 let buttons = {
   0: document.querySelector("#zero"),
   1: document.querySelector("#one"),
@@ -74,7 +73,6 @@ document.body.addEventListener("keydown", function (e) {
   }
 });
 
-// 4. Key release = remove active class
 document.body.addEventListener("keyup", function (e) {
   let key = e.key.toLowerCase();
 
